@@ -83,6 +83,7 @@ function displayTodos() {
 
     const del = document.createElement("button");
     del.classList.add("delete");
+    del.classList.add("darkmode-ignore");
     del.innerText = "Delete";
 
     // Delete button function

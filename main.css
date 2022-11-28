@@ -117,6 +117,7 @@ input[type="checkbox"] {
   border-radius: 50%;
   border: 2px solid var(--business);
   box-shadow: var(--business-glow);
+  isolation: isolate;
 }
 
 .bubble.personal {
