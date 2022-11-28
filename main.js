@@ -68,6 +68,7 @@ function displayTodos() {
     const edit = document.createElement("button");
     edit.innerText = "Edit";
     edit.classList.add("edit");
+    edit.style.isolation = "isolate";
     //Make content editable
     edit.addEventListener("click", (e) => {
       const input = textDiv.querySelector("input");
@@ -83,7 +84,7 @@ function displayTodos() {
 
     const del = document.createElement("button");
     del.classList.add("delete");
-    del.classList.add("darkmode-ignore");
+    del.style.isolation = "isolate";
     del.innerText = "Delete";
 
     // Delete button function
