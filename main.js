@@ -1,6 +1,7 @@
 "use strict";
 
 let todos = JSON.parse(localStorage.getItem("todos")) || [];
+const btnSort = document.querySelector("#sort");
 
 window.addEventListener("load", () => {
   //Selecting main elements
@@ -8,7 +9,6 @@ window.addEventListener("load", () => {
   const input = document.querySelector("#content");
   const nameInput = document.querySelector("#name");
   const username = localStorage.getItem("username") || "";
-
   //Username
   nameInput.value = username;
   nameInput.addEventListener("change", (e) => {
@@ -35,13 +35,17 @@ window.addEventListener("load", () => {
   displayTodos();
 });
 
-function displayTodos() {
+function displayTodos(sort = false) {
   //Creating html elements
   const list = document.querySelector("#todo-list");
   list.innerHTML = "";
 
-  todos
-    .sort((a, b) => b.createdAt - a.createdAt)
+  const todoSort = sort
+    ? todos.sort((a, b) => b.createdAt - a.createdAt)
+    : todos.sort((a, b) => a.createdAt - b.createdAt);
+
+  todoSort
+    // .sort((a, b) => b.createdAt - a.createdAt)
     .forEach((todo) => {
       const todoItem = document.createElement("div");
       todoItem.classList.add("todo-item");
@@ -63,6 +67,17 @@ function displayTodos() {
       textDiv.classList.add("todo-content");
 
       textDiv.innerHTML = `<input type="text" value ="${todo.content}" readonly>`;
+
+      const date = document.createElement("div");
+      date.classList.add("date");
+
+      //Created at
+      const dateFormat = new Date(todo.createdAt);
+      const hours = `${dateFormat.getHours()}`.padStart(2, 0);
+      const mins = `${dateFormat.getMinutes()}`.padStart(2, 0);
+      // date.innerText = `Created at: ${hours}:${mins < 10 ? "0" : ""}${mins}`;
+      date.innerText = `Created at: ${hours}:${mins}`;
+      btnSort.innerText = sort ? "SORT ↑" : "SORT ↓";
 
       const actions = document.createElement("div");
       actions.classList.add("actions");
@@ -115,8 +130,18 @@ function displayTodos() {
       label.appendChild(checkbox);
       label.appendChild(bubble);
       todoItem.appendChild(textDiv);
+      todoItem.appendChild(date);
       todoItem.appendChild(actions);
       actions.appendChild(edit);
       actions.appendChild(del);
     });
 }
+
+let sorted = true;
+
+btnSort.addEventListener("click", (e) => {
+  e.preventDefault();
+  displayTodos(sorted);
+  sorted = !sorted;
+  console.log(sorted);
+});

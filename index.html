@@ -66,7 +66,10 @@
       </section>
 
       <section class="todo-list">
-        <h3>TODO LIST</h3>
+        <div style="display: flex; justify-content: space-between">
+          <h3>TODO LIST</h3>
+          <button id="sort"></button>
+        </div>
 
         <div class="list" id="todo-list">
           <div class="todo-item done">
@@ -78,6 +81,8 @@
             <div class="todo-content">
               <input type="text" value="Make a video" readonly />
             </div>
+
+            <div class="date">28/11/2022</div>
 
             <div class="actions">
               <button class="edit">Edit</button>
@@ -103,6 +108,7 @@
         </div>
       </section>
     </main>
+
     <script src="main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 
